@@ -20,7 +20,7 @@ void display(int n) {
 int main() {
     FILE *INPUT;
     INPUT = fopen("input.dat", "r");
-    int n, i, k, end = 0;
+    int n, i, k, end;
     char state1[3], input[3], state2[3], state[3];
     printf("Enter no of states : ");
     scanf("%d", &n);
@@ -33,8 +33,11 @@ int main() {
         strcpy(state, states[k]);
         strcpy(copy, state);
         add_state(state, i++);
-        while (end != EOF) {
+        while (1) {
             end = fscanf(INPUT, "%s%s%s", state1, input, state2);
+            if (end == EOF) {
+                break;
+            }
             if (strcmp(state, state1) == 0 && strcmp(input, "e") == 0) {
                       add_state(state2, i++);
                       strcpy(state, state2);
